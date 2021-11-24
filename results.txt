@@ -5,13 +5,13 @@ Authors:
     Soner Türüdü <s.turudu@rug.nl>
     Etienne Gaudrain <etienne.gaudrain@cnrs.fr>
     Thomas Koelewijn <t.koelewijn@rug.nl>
-    Gloria Araiza Illan <g.a.araiza.illan@rug.nl>
+    Gloria Araiza-Illan <g.a.araiza.illan@rug.nl>
 
 Version: 0.1
 
 Date: 2021-11-17
 
-The current version can be found at https://git.web.rug.nl/dBSPL/din-specification.
+The current version can be found at https://github.com/dbSPLab/din-specification
 
 
 DESCRIPTION
@@ -63,7 +63,7 @@ participant
 				The identification token of the participant.
 
 trials
-	Type: array of `trial` objects, where `trial` objects have the following keys:
+	Type: array of 'trial' objects, where 'trial' objects have the following keys:
 
 		digits_presented
 			Type: array of integers
@@ -117,4 +117,4 @@ din_score
 din_score_sd
 	Type: float
 	Description:
-		The standard deviation calculated on the same SNR values the `din_score` is calculated on.
+		The standard deviation calculated on the same SNR values the 'din_score' is calculated on.
