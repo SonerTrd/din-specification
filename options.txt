@@ -1,0 +1,137 @@
+Specifications of options for the DIN test
+==========================================
+
+Authors:
+    Etienne Gaudrain <etienne.gaudrain@cnrs.fr>
+    Thomas Koelewijn <t.koelewijn@rug.nl>
+
+Version: 0.0
+
+Date: 2021-10-29
+
+The current version can be found at https://git.web.rug.nl/dBSPL/din-specification.
+
+
+DESCRIPTION
+
+This document lists the common options for generic digit-in-noise tests, across platform, languages and implementations.
+
+The options described in the PARAMETERS section are all mandatory. The ones described in OPTIONAL PARAMETERS may be
+considered for future implementations. All current implementations that do not implement these optional parameters should
+behave according to the default value.
+
+
+PARAMETERS
+
+__version__
+    Type: string
+    Description:
+        This is a read-only string. This specifies which version of the options specification we are following. This is
+        useful to identify the options object version for automatic processing of the parameters if the format changes drastically
+        in the future.
+
+lang
+    Type: string
+    Description:
+        The language of the test material. This has to follow the IETF language tag format, optionally with two-letter region subtags
+        (https://en.wikipedia.org/wiki/IETF_language_tag). The code is composed of a 2-letter, lowercase language code that follows
+        ISO 639-1 (https://en.wikipedia.org/wiki/ISO_639-1). It is optionally followed by a dash ("-"), and a uppercase 2-letter region
+        subtag that specifies the region where the variant of the language is used (https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
+        For instance Dutch from Netherlands is `nl-NL`, while Belgian Dutch is `nl-BE`.
+
+material_source
+    Type: string
+    Description:
+        This is a string describing where the material comes from. This is primarily intended to be read-only when interpreting
+        results, but it could also be used to select between sources of materials.
+
+presentation_method
+    Type:  'diotic' | 'dichotic'
+    Default: 'diotic'
+    Description:
+        How sound is presented
+        - 'diotic': in mono on both ears
+        - 'dichotic': antiphasic speech, noise in mono
+
+starting_snr
+    Type: number
+    Default: TBD
+    Description:
+        The value of the SNR at the beginning of the test.
+
+mixing_method
+    Type: 'fixed_speech' | 'fixed_noise' | 'fixed_level'
+    Default: 'fixed_noise'
+    Description:
+        How the speech and noise are mixed.
+        - 'fixed_speech': The speech level is fixed.
+        - 'fixed_noise': The noise level is fixed.
+        - 'fixed_level': The overall level, after mixing, is fixed.
+    Related parameters: fixed_level
+
+fixed_level
+    Type: number
+    Default: Implementation dependent
+    Description:
+        The fixed level described by `mixing_method`. The value depends on the implementation. For instance, in Matlab, with
+        a calibrated system, this may be the level in dB SPL or the RMS as calculated in Matlab.
+    Related parameters: mixing_method
+
+step_size
+    Type: number
+    Default: 2
+    Description:
+        The step size for the SNR, in dB.
+    Related: step_size_first
+
+max_snr
+    Type: number
+    Default: 12
+    Description:
+        The maximal SNR value, in dB. The SNR will nor be able to go above this value. In addition, the test may be stopped after a
+        number of trial at this SNR occur.
+    Related parameters: min_snr, stop_after_snr_saturation
+
+min_snr
+    Type: number
+    Default: -12
+    Description:
+        The minimal SNR value, in dB. The SNR will nor be able to go below this value. In addition, the test may be stopped after a
+        number of trial at this SNR occur.
+    Related parameters: max_snr, stop_after_snr_saturation
+
+stop_after_snr_saturation
+    Type: number
+    Default: +Inf
+    Description:
+        The number of trials at `min_snr` or `max_snr` we tolerate before stopping the test.
+
+first_trial_repetition
+    Type: True | False
+    Default: True
+    Description:
+        Whether we repeat the first trial until it is reported correctly. In this phase, the step size is `step_size_first`.
+    Related: step_size_first
+
+din_score_average_over
+    Type: integer > 0
+    Default: 21
+    Description:
+        The number of trials the DIN-score is calculated over.
+
+
+OPTIONAL PARAMETERS
+
+unordered_is_correct
+    Type: True | False
+    Default: False
+    Description:
+        Whether an answer is considered correct if the digits are returned in the wrong order.
+
+trial_number
+    Type: integer >= din_score_average_over
+    Default: 24
+    Description:
+        The number of trials in the test. This is likely dependent on the available material. For instance the Dutch DIN comes
+        in lists of 24 trials.
+    Related: din_score_average_over

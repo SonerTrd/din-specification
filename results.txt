@@ -1,0 +1,120 @@
+Specifications of results for the DIN test
+==========================================
+
+Authors:
+    Soner Türüdü <s.turudu@rug.nl>
+    Etienne Gaudrain <etienne.gaudrain@cnrs.fr>
+    Thomas Koelewijn <t.koelewijn@rug.nl>
+    Gloria Araiza Illan <g.a.araiza.illan@rug.nl>
+
+Version: 0.1
+
+Date: 2021-11-17
+
+The current version can be found at https://git.web.rug.nl/dBSPL/din-specification.
+
+
+DESCRIPTION
+
+The DIN result files are [JSON](https://www.json.org/) objects saved in plain text, using UTF-8 encoding.
+The fields below are *mandatory*. Additional fields can be added as necessary for specific implementations.
+
+
+STRUCTURE
+
+A JSON object with the following keys:
+
+__version__
+	Type: string
+    Description:
+        This is a read-only string. This specifies which version of the options specification we are following.
+		This is useful to identify the result object version for automatic processing, especially if the format
+		changes drastically in the future.
+
+options
+	Type: string
+	Description:
+		A copy of the parameters as a JSON object.
+
+origin
+	Type: string
+	Description:
+		A description of the origin of the data. For example, if it is online, it can mention "web" and add
+		the experiment id (e.g. "web: dbsplab.fun/2020-05-25-vodi-lexrev-tk-2.0"). For local implementations,
+		this could be the name of the running environment ("matlab", "python") followed by the experiment id
+		(e.g. "matlab: PICKA-XL/tk-st_ger0.1").
+
+participant
+   	Type: A JSON object with the following keys:
+
+		age
+			Type: float
+			Description:
+				The age in decimal years.
+
+		sex
+			Type: string
+			Description:
+				A free text entry.
+
+		id
+			Type: string
+			Description:
+				The identification token of the participant.
+
+trials
+	Type: array of `trial` objects, where `trial` objects have the following keys:
+
+		digits_presented
+			Type: array of integers
+			Description:
+				The presented digits. 
+
+		digits_answered
+			Type: array of integers
+			Description:
+				The presented digits.
+
+		snr
+			Type: float
+			Description:
+				The SNR value for the trial.
+
+		timestamp
+			Type: string representation of date-time in MySQL format "YYYY-MM-DD hh:mm:ss"
+			Description:
+				For experiments ran locally, this can be the local time. For online experiment, it is
+				recommended to make this the UTC time or to add time zone specification.
+
+		correct
+			Type: integer 1 or 0
+			Description:
+				1 if the answer is correct, 0 if it is not.
+	
+		sound_index
+			Type: integer
+			Description:
+				The index of the presented sound in the list.
+		
+		sound_file
+			Type: string or array of strings
+			Description:
+				The file name of the sound that was played. In case the digit triplet is assembled from individual
+				files, then an array of file names should be stored.
+
+list_id
+	Type: string or integer
+	Description:
+		An identifier that allows to locate the list that was used for the sequence of digit triplets.
+		This can be an integer index of the lists, or the name of the list, or the path to the list that
+		was used.
+
+din_score
+	Type: float
+	Description:
+		Final DIN score, i.e. the average of the last n SNR values.
+
+din_score_sd
+	Type: float
+	Description:
+		The standard deviation calculated on the same SNR values the `din_score` is calculated on.
