@@ -15,8 +15,11 @@ Contributors
 ------------
 
 Etienne Gaudrain <etienne.gaudrain@cnrs.fr>
+
 Thomas Koelewijn <t.koelewijn@rug.nl>
+
 Soner Türüdü     <s.turudu@rug.nl>
+
 Gloria Araiza-Illan <g.a.araiza.illan@rug.nl>
 
 License
