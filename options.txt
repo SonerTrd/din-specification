@@ -8,7 +8,7 @@ Authors:
 
 Version: 0.1
 
-Date: 2021-10-29
+Date: 2021-12-21
 
 The current version can be found at https://github.com/dbSPLab/din-specification.
 
@@ -24,7 +24,7 @@ behave according to the default value.
 
 PARAMETERS
 
-__version__
+version
     Type: string
     Description:
         This is a read-only string. This specifies which version of the options specification we are following. This is
@@ -39,6 +39,13 @@ lang
         ISO 639-1 (https://en.wikipedia.org/wiki/ISO_639-1). It is optionally followed by a dash ("-"), and a uppercase 2-letter region
         subtag that specifies the region where the variant of the language is used (https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
         For instance Dutch from Netherlands is `nl-NL`, while Belgian Dutch is `nl-BE`.
+
+name
+    Type: string
+    Default: 'default'
+    Description:
+        A label used to identify and refer to a specific set of options. For instance, you may want to refer a specific paper that
+        the options are emulating.
 
 material_source
     Type: string
