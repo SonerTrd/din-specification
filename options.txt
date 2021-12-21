@@ -6,7 +6,7 @@ Authors:
     Thomas Koelewijn <t.koelewijn@rug.nl>
     Gloria Araiza Illan <g.a.araiza.illan@rug.nl>
 
-Version: 0.0
+Version: 0.1
 
 Date: 2021-10-29
 
@@ -89,30 +89,32 @@ initial_step_size
     Type: number
     Default: 2
     Description:
-        The step size for the SNR, in dB, at the beginning of the experiment.
+        The step size for the SNR, in dB, at the beginning of the experiment. The step size is only
+        used to increase the SNR if the response to the first trial is incorrect.
     Related: step_size, first_trial_repetition
 
 max_snr
     Type: number
     Default: 12
     Description:
-        The maximal SNR value, in dB. The SNR will nor be able to go above this value. In addition, the test may be stopped after a
-        number of trial at this SNR occur.
+        The maximal SNR value, in dB. The SNR will not be able to go above this value. In addition, the test may be stopped after a
+        number of trial above this SNR occur.
     Related parameters: min_snr, stop_after_snr_saturation
 
 min_snr
     Type: number
     Default: -12
     Description:
-        The minimal SNR value, in dB. The SNR will nor be able to go below this value. In addition, the test may be stopped after a
-        number of trial at this SNR occur.
+        The minimal SNR value, in dB. The SNR will not be able to go below this value. In addition, the test may be stopped after a
+        number of trial below this SNR occur.
     Related parameters: max_snr, stop_after_snr_saturation
 
 stop_after_snr_saturation
     Type: number
     Default: +Inf
     Description:
-        The number of trials at `min_snr` or `max_snr` we tolerate before stopping the test.
+        This specifies the number of trials below `min_snr` or above `max_snr` we tolerate before stopping the test. Two separare counters
+        must be implemented, one for SNRs that are too small, and one for SNRs that are too large.
 
 first_trial_repetition
     Type: True | False
@@ -136,7 +138,7 @@ unordered_is_correct
     Description:
         Whether an answer is considered correct if the digits are returned in the wrong order.
 
-trial_number
+number_of_trials
     Type: integer >= din_score_average_over
     Default: 24
     Description:
