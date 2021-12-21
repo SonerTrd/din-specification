@@ -9,7 +9,7 @@ Authors:
 
 Version: 0.1
 
-Date: 2021-11-17
+Date: 2021-12-21
 
 The current version can be found at https://github.com/dbSPLab/din-specification
 
@@ -24,15 +24,15 @@ STRUCTURE
 
 A JSON object with the following keys:
 
-__version__
+version
 	Type: string
-    Description:
-        This is a read-only string. This specifies which version of the options specification we are following.
+	Description:
+        	This is a read-only string. This specifies which version of the results specification we are following.
 		This is useful to identify the result object version for automatic processing, especially if the format
 		changes drastically in the future.
 
 options
-	Type: string
+	Type: JSON object
 	Description:
 		A copy of the parameters as a JSON object.
 
@@ -79,6 +79,11 @@ trials
 			Type: float
 			Description:
 				The SNR value for the trial.
+				
+		next_snr
+			Type: float
+			Description:
+				The SNR value calculated for the next trial.
 
 		timestamp
 			Type: string representation of date-time in MySQL format "YYYY-MM-DD hh:mm:ss"
