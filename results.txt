@@ -73,7 +73,7 @@ trials
 		digits_answered
 			Type: array of integers
 			Description:
-				The presented digits.
+				The answered digits.
 
 		snr
 			Type: float
